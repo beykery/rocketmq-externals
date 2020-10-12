@@ -1,6 +1,7 @@
-FROM java:8
-VOLUME /tmp
-ADD rocketmq-console-ng-*.jar rocketmq-console-ng.jar
-RUN sh -c 'touch /rocketmq-console-ng.jar'
+FROM williamoony/java8:202
+MAINTAINER william "williamoony@gmail.com"
+WORKDIR /
+ADD rocketmq-console-ng-2.0.0.jar app.jar
 ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar /rocketmq-console-ng.jar" ]
+EXPOSE 8102
+ENTRYPOINT java $JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.security.egd=file:/dev/./urandom -Djava.library.path=/usr/local/apr/lib -jar /app.jar
